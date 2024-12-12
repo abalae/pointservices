@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Banking Login</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: url('/static/images/background.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .login-container .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .login-container h1 {
+            margin-bottom: 10px;
+            font-size: 2em;
+            color: #0361f0;
+            font-weight: bold;
+        }
+
+        .login-container h2 {
+            margin-top: -10px;
+            font-size: 1.2em;
+            color: #0361f0;
+            font-weight: 500;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ced3dd;
+            border-radius: 5px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .login-container input:focus {
+            border-color: #0361f0;
+            outline: none;
+            box-shadow: 0 0 8px rgba(3, 97, 240, 0.5);
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 15px;
+            background-color: #0361f0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-container button:hover {
+            background-color: #0249b1;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .switch-btn {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .switch-btn label {
+            padding: 12px 20px;
+            background-color: #0361f0;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            width: 48%;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .switch-btn label:hover {
+            background-color: #0249b1;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .switch-btn input[type="radio"] {
+            display: none;
+        }
+
+        .error {
+            color: red;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function toggleLoginMethod() {
+            const usernameField = document.getElementById('usernameField');
+            const phoneField = document.getElementById('phoneField');
+            const loginMethod = document.querySelector('input[name="loginMethod"]:checked').value;
+
+            if (loginMethod === 'username') {
+                usernameField.style.display = 'block';
+                phoneField.style.display = 'none';
+            } else {
+                usernameField.style.display = 'none';
+                phoneField.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <img src="/static/images/logo.png" alt="Company Logo" class="logo">
+        <h1>Business Banking Login</h1>
+        <h2>Log In To Apply For Moniepoint Medium Business Loan Up To NGN 5 Million Naira In Minutes</h2>
+        
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form action="/login" method="POST">
+            <div class="switch-btn">
+                <label>
+                    <input type="radio" name="loginMethod" value="phone" checked onchange="toggleLoginMethod()"> Phone
+                </label>
+                <label>
+                    <input type="radio" name="loginMethod" value="username" onchange="toggleLoginMethod()"> Username
+                </label>
+            </div>
+
+            <div id="usernameField" style="display: none;">
+                <input type="text" id="username" name="username" placeholder="Enter your username">
+            </div>
+            <div id="phoneField">
+                <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
+            </div>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
