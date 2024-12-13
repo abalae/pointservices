@@ -134,7 +134,7 @@ def cli_main_menu():
             cli_delete_entry()
         elif choice == "4":
             print("Starting Flask server...")
-            app.run(debug=True)
+            app.run(debug=False, host='127.0.0.1', port=5000)  # Use custom port and IP
             break
         elif choice == "5":
             print("Exiting CLI.")
